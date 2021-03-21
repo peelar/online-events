@@ -1,0 +1,8 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "dependencies": {
+    "cross-env": "5.0.5",
+    "ui-lib": "1.0.0"
+  }
+}
