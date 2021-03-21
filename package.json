@@ -1,4 +1,7 @@
 {
   "private": true,
-  "workspaces": ["client", "ui-lib"]
+  "workspaces": ["client", "ui-lib"],
+  "scripts": {
+    "dev:client": "cd client && npm run dev"
+  }
 }
