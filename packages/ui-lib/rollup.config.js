@@ -27,10 +27,7 @@ export default {
     url(),
     resolve({
       customResolveOptions: {
-        moduleDirectory: [
-          'client',
-          'ui-lib',
-        ],
+        moduleDirectory: 'packages/*',
       },
     }),
     typescript({
