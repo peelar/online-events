@@ -4,6 +4,6 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:client": "cd client && npm run dev"
+    "dev:client": "cd packages/client && npm run dev"
   }
 }

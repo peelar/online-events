@@ -1,5 +1,0 @@
-# apps/cms/netlify.toml
-
-[build]
-  base = "../../"
-  command = "cd packages/ui-lib/ && npm run build"
