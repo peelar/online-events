@@ -4,7 +4,7 @@ import { Box, Flex } from "ui-lib";
 
 const Nav: React.FC = () => {
   return (
-    <Box py={2} fullWidth>
+    <Box py={2}>
       <Flex direction="row-reverse">
         <User />
       </Flex>
