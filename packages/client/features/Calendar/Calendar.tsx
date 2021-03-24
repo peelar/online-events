@@ -1,4 +1,4 @@
-import fetcher from "api/fetcher";
+import fetcher from "lib/fetcher";
 import React from "react";
 import useSWR from "swr";
 import { Box, CircularProgress } from "ui-lib";
