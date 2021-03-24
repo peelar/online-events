@@ -7,11 +7,11 @@ import { AppProps } from "next/dist/next-server/lib/router/router";
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ChakraProvider>
-      <Layout>
-        <Provider session={pageProps.session}>
+      <Provider session={pageProps.session}>
+        <Layout>
           <Component {...pageProps} />
-        </Provider>
-      </Layout>
+        </Layout>
+      </Provider>
     </ChakraProvider>
   );
 };
