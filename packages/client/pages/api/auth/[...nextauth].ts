@@ -1,6 +1,44 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 
+async function refreshAccessToken(token) {
+  try {
+    const url =
+      "https://oauth2.googleapis.com/token?" +
+      new URLSearchParams({
+        client_id: process.env.GOOGLE_CLIENT_ID,
+        client_secret: process.env.GOOGLE_CLIENT_SECRET,
+        grant_type: "refresh_token",
+        refresh_token: token.refreshToken,
+      });
+
+    const response = await fetch(url, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      method: "POST",
+    });
+
+    const refreshedTokens = await response.json();
+
+    if (!response.ok) {
+      throw refreshedTokens;
+    }
+
+    return {
+      ...token,
+      accessToken: refreshedTokens.access_token,
+      accessTokenExpires: Date.now() + refreshedTokens.expires_in * 1000,
+      refreshToken: refreshedTokens.refresh_token ?? token.refreshToken, // Fall back to old refresh token
+    };
+  } catch (error) {
+    return {
+      ...token,
+      error: "RefreshAccessTokenError",
+    };
+  }
+}
+
 export default NextAuth({
   providers: [
     Providers.Google({
@@ -17,12 +55,22 @@ export default NextAuth({
   },
   secret: process.env.SECRET,
   callbacks: {
-    async jwt(token, _, account) {
-      if (account?.accessToken) {
+    async jwt(token, user, account) {
+      if (account && user) {
         token.accessToken = account.accessToken;
         token.refreshToken = account.refreshToken;
+        token.accessTokenExpires =
+          Date.now() + ((account.expires_in as number) ?? 1) * 1000;
+
+        return token;
       }
-      return token;
+      // Return previous token if the access token has not expired yet
+      if (Date.now() < token.accessTokenExpires) {
+        return token;
+      }
+
+      // Access token has expired, try to update it
+      return refreshAccessToken(token);
     },
   },
 });

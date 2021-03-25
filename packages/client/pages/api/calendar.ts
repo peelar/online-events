@@ -1,7 +1,12 @@
 import fetcher from "lib/fetcher";
-import { getToken } from "next-auth/jwt";
+import { getToken, JWT } from "next-auth/jwt";
 
 const secret = process.env.SECRET;
+
+type ExtendedJWT = JWT & {
+  accessToken: string;
+  refreshToken: string;
+};
 
 const getCalendar = (token: string) =>
   fetcher({
@@ -19,11 +24,12 @@ const getCalendar = (token: string) =>
 export default async (req, res) => {
   try {
     const token = await getToken({ req, secret, encryption: true });
-    const accessToken = token.accessToken as string;
+    const { accessToken } = token as ExtendedJWT;
     const response = await getCalendar(accessToken);
 
     res.status(200).json(response.data);
   } catch (error) {
+    console.log(error?.response?.data?.errors);
     res.status(500);
   }
 };
