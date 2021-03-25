@@ -27,6 +27,7 @@ const User: React.FC = () => {
         </Button>
       )}
       {session && (
+        // to-do: animation on hover: avatar slides to the left, log-out icon in the background
         <Avatar
           name={session.user.name}
           onClick={() => signOut()}
