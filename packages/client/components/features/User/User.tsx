@@ -32,11 +32,6 @@ const User: React.FC = () => {
           name={session.user.name}
           onClick={() => signOut()}
           src={session.user.image}
-          sx={{
-            ":hover": {
-              cursor: "pointer",
-            },
-          }}
         />
       )}
     </>
