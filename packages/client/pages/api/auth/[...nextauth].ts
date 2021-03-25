@@ -20,6 +20,7 @@ export default NextAuth({
     async jwt(token, _, account) {
       if (account?.accessToken) {
         token.accessToken = account.accessToken;
+        token.refreshToken = account.refreshToken;
       }
       return token;
     },
