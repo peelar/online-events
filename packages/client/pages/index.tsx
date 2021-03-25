@@ -1,6 +1,6 @@
-import Calendar from "features/Calendar/Calendar";
+import Calendar from "components/features/Calendar/Calendar";
 import React from "react";
-import Intro from "templates/Intro/Intro";
+import Intro from "components/templates/Intro/Intro";
 import { Box } from "ui-lib";
 
 const Index: React.FC = () => {

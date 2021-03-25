@@ -1,7 +1,7 @@
 import fetcher from "lib/fetcher";
 import React from "react";
 import useSWR from "swr";
-import Event from "templates/Event/Event";
+import Event from "components/templates/Event/Event";
 import { Box, Fade, SimpleGrid } from "ui-lib";
 
 type GoogleCalendarResponse = any;

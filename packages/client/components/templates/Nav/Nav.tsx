@@ -1,4 +1,4 @@
-import User from "features/User/User";
+import User from "components/features/User/User";
 import React from "react";
 import { Box, Flex } from "ui-lib";
 

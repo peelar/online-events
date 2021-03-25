@@ -1,5 +1,5 @@
 import React from "react";
-import Nav from "templates/Nav/Nav";
+import Nav from "components/templates/Nav/Nav";
 import { Container } from "ui-lib";
 
 const Layout: React.FC = ({ children }) => {
