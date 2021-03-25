@@ -1,7 +1,8 @@
 import fetcher from "lib/fetcher";
 import React from "react";
 import useSWR from "swr";
-import { Box, Fade, SimpleGrid, Text } from "ui-lib";
+import Event from "templates/Event/Event";
+import { Box, Fade, SimpleGrid } from "ui-lib";
 
 type GoogleCalendarResponse = any;
 
@@ -33,17 +34,11 @@ const Calendar: React.FC = () => {
             }/${date.getFullYear()}`;
 
             return (
-              <Box
-                p={2}
-                borderRadius="lg"
-                borderWidth="1px"
-                color="gray.500"
-                fontSize="md"
+              <Event
                 key={`event-${index}`}
-              >
-                <Text color="black">{textDate}</Text>
-                <Text>{item.summary}</Text>
-              </Box>
+                heading={textDate}
+                subheading={item.summary}
+              />
             );
           })}
         </SimpleGrid>
