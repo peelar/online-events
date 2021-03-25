@@ -3,6 +3,7 @@ import React from "react";
 import useSWR from "swr";
 import Event from "components/templates/Event/Event";
 import { Box, Fade, SimpleGrid } from "ui-lib";
+import Link from "next/link";
 
 type GoogleCalendarResponse = any;
 
@@ -34,11 +35,11 @@ const Calendar: React.FC = () => {
             }/${date.getFullYear()}`;
 
             return (
-              <Event
-                key={`event-${index}`}
-                heading={textDate}
-                subheading={item.summary}
-              />
+              <Link href={`event/${item.id}`} key={`event-${index}`}>
+                <a>
+                  <Event heading={textDate} subheading={item.summary} />
+                </a>
+              </Link>
             );
           })}
         </SimpleGrid>
